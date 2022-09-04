@@ -12,6 +12,7 @@ class Route {
     private string $method;
 
     public bool $valid_access;
+    public string $title;
 
     public function __construct()
     {
@@ -68,6 +69,7 @@ class Route {
         $this->controller = new ('\App\Controller\\' . ucfirst($data['controller']));
         $this->method = $data['method'];
         $this->parameters = array_slice($uri, 2);
+        $this->title = $data['status'] ? $data['title'] : $valid_alias['title'];
 
         return true;
     }

@@ -24,14 +24,14 @@ class Route {
         return $line['id'] ?? false;
     }
 
-    private function getMethod(string $name, int $controller): int|bool
+    private function getMethod(string $name, int $controller): array|bool
     {
-        $sql = $this->connection->prepare('SELECT id FROM method WHERE name = ? AND controller = ? LIMIT 1');
+        $sql = $this->connection->prepare('SELECT id, title FROM method WHERE name = ? AND controller = ? LIMIT 1');
         $sql->execute([$name, $controller]);
 
         $line = $sql->fetch();
 
-        return $line['id'] ?? false;
+        return !empty($line['id']) ? $line : false;
     }
 
     public function validateAccess(array $params): array
@@ -39,6 +39,7 @@ class Route {
         $ret['status'] = false;
         $ret['controller'] = 'login';
         $ret['method'] = 'index';
+        $ret['title'] = '';
 
         if (empty($params[0]))
             return $ret;
@@ -49,12 +50,13 @@ class Route {
             return $ret;
 
         $method = $params[1] ?? 'index';
-        $method_id = $this->getMethod($method, $controller_id);
-        $ret['status'] = is_int($method_id);
+        $data_method = $this->getMethod($method, $controller_id);
+        $ret['status'] = !empty($data_method['id']) && is_int($data_method['id']);
 
         if ($ret['status']) {
             $ret['controller'] = $params[0];
             $ret['method'] = $method;
+            $ret['title'] = $data_method['title'] ?? $ret['title'];
         }
 
         return $ret;

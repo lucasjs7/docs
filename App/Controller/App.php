@@ -16,6 +16,7 @@ class App {
 
     private function view()
     {
+        define('PG_TITLE', $this->route->title);
         $data = $this->route->callMethod();
 
         require('App/View/App.phtml');

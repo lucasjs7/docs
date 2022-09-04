@@ -7,6 +7,7 @@ CREATE TABLE controller (
 CREATE TABLE method (
 	id int(11) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
+    title varchar(255) NOT NULL,
     controller int(11) NOT NULL,
     access varchar(255) DEFAULT NULL,
     PRIMARY KEY (id),
