@@ -1,2 +1,6 @@
 vendor/**
+composer.phar
+composer.lock
+/.idea
+/.vscode
 config.php
