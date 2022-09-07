@@ -1,20 +1,29 @@
+<?php
+use App\Controller\View;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?= PG_TITLE ?></title>
+
+    <link rel="stylesheet" href="css/app.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
-    <?php
+    <div id="msg" class="px-8 py-4 bg-white rounded shadow" style="display:none;">
+        <div class="content"></div>
+        <span class="close ml-3 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></svg>
+        </span>
+    </div>
 
-        if (!empty($data['view']) && file_exists('App/View/' . $data['view'])) {
-            require('App/View/' . $data['view']);
-        }
-
-    ?>
+    <?php View::getFile($data['view'], $data); ?>
 </body>
 </html>

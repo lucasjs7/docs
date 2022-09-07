@@ -19,7 +19,7 @@ class App {
         define('PG_TITLE', $this->route->title);
         $data = $this->route->callMethod();
 
-        require('App/View/App.phtml');
+        View::getFile('App', $data);
     }
 
     private function validateAccess(): void
