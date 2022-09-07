@@ -1,0 +1,13 @@
+<?php
+use App\Controller\View;
+?>
+<div class="w-full flex flex-row">
+    <?php View::getFile('_includes/menul'); ?>
+    <div class="grow max-h-screen overflow-y-auto">
+        <div class="container mx-auto">
+            <div class="w-full px-12 pt-12">
+                <?php View::getFile($data['content'], $data); ?>
+            </div>
+        </div>
+    </div>
+</div>
