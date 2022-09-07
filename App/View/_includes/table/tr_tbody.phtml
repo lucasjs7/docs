@@ -1,0 +1,17 @@
+<?php
+use App\Controller\View;
+
+foreach($data as $row) {
+    ?>
+        <tr>
+            <?php foreach($row as $col) { ?>
+                <td
+                    class="<?= $col['class'] ?> px-4 py-1 first-of-type:pl-0 last-of-type:pr-0"
+                    <?= View::getAttr($col['attr'] ?? []) ?>
+                >
+                    <?= $col['content'] ?>
+                </td>
+            <?php } ?>
+        </tr>
+    <?php
+}
