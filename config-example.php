@@ -1,5 +1,7 @@
 <?php
 
+define('DEBUG', false);
+
 // MYSQL Connection
 
 define('MYSQL_HOST',     '127.0.0.1');
