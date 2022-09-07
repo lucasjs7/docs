@@ -1,0 +1,19 @@
+#msg {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 16px;
+    display: flex;
+    align-items: center;
+    max-width: calc(100% - 64px);
+    border: 1px solid;
+    z-index: 99;
+}
+
+#msg[data-type="error"] {
+    border-color: #ff2424;
+}
+
+#msg[data-type="success"] {
+    border-color: #31d128;
+}
