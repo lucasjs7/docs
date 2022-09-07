@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-class User {
+class Users {
 
     public function login()
     {

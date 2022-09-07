@@ -78,7 +78,7 @@ class Route {
     {
         $key = $controller . '-' . $method;
         $res = match($key) {
-            'login-index' => ['user', 'login'],
+            'login-index' => ['users', 'login'],
             default => false
         };
 
