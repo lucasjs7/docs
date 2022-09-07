@@ -14,3 +14,12 @@ CREATE TABLE method (
     CONSTRAINT fk_controller_method FOREIGN KEY (controller)
     REFERENCES controller(id)
 );
+
+CREATE TABLE user (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    level varchar(20) DEFAULT 'user',
+    PRIMARY KEY (id)
+);

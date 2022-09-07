@@ -1,3 +1,45 @@
-<div>
-    <?= PG_TITLE ?>
+<?php if (!empty($_COOKIE['user_id'])) { ?>
+    <script>window.location.href= 'dashboard';</script>
+<? } ?>
+
+<div class="flex flex-row justify-center items-center h-screen">
+    <div class="basis-[328px] px-5 py-5 my-5 rounded shadow-lg">
+        <h1 class="text-3xl font-bold mb-6">
+            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 10h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1h1V9a7 7 0 1 1 14 0v1zM5 12v8h14v-8H5zm6 2h2v4h-2v-4zm6-4V9A5 5 0 0 0 7 9v1h10z" fill="rgba(161,161,170,1)"/></svg>
+            <?= PG_TITLE ?>
+        </h1>
+        <input type="text" name="user" placeholder="E-mail" class="mb-2 w-full h-9 mt-1 px-2 py-1 rounded-[4px] border border-zinc-300 font-normal focus:border-blue-600 focus:outline-none focus:ring-0 focus:ring-transparent">
+        <input type="password" name="password" placeholder="Senha" class="mb-2 w-full h-9 mt-1 px-2 py-1 rounded-[4px] border border-zinc-300 font-normal focus:border-blue-600 focus:outline-none focus:ring-0 focus:ring-transparent">
+        <hr class="w-full border-zinc-300 mt-4 mb-2">
+        <a id="submit" class="mt-2 inline-flex items-center text-base px-5 py-1.5 font-semibold text-white border border-zinc-700 bg-zinc-700 rounded-[4px] hover:cursor-pointer focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">Entrar</a>
+    </div>
 </div>
+<script>
+    $(document).ready(function(){
+
+        $(document).on('click', '#submit', function(){
+
+            $.ajax({
+                url: 'App/Controller/user/login.php',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    user: $('[name="user"]').val(),
+                    password: $('[name="password"]').val()
+                },
+                success: function(data) {
+
+                    if (data.status) {
+                        msg('success', data.message);
+                        window.location.href = 'dashboard';
+                    } else {
+                        msg('error', data.message);
+                    }
+
+                }
+            })
+
+        });
+
+    });
+</script>

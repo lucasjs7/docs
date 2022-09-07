@@ -6,8 +6,7 @@ class User {
 
     public function login()
     {
-        $data['title'] = '<h1>Página de Login</h1>';
-        $data['view'] = 'user/login.phtml';
+        $data['view'] = 'user/login';
 
         return $data;
     }
