@@ -48,4 +48,15 @@ class View {
         return $html;
     }
 
+    public static function getAttr(array $attrs)
+    {
+        $data = [];
+
+        foreach($attrs as $k => $v) {
+            $data[] = "{$k}=\"{$v}\"";
+        }
+
+        return implode(' ', $data);
+    }
+
 }
