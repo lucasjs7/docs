@@ -17,3 +17,23 @@
 #msg[data-type="success"] {
     border-color: #31d128;
 }
+
+/* Modal */
+
+.modal {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+    background: #f1f1f182;
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+}
+
+.modal .modal_body {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
