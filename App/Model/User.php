@@ -16,7 +16,7 @@ class User {
     public function login(string $user, string $password): bool
     {
         $connection = Connection::getPDO();
-        $sql = $connection->prepare('SELECT id, name, email, password FROM user WHERE email = ? LIMIT 1 ');
+        $sql = $connection->prepare('SELECT id, name, email, password FROM users WHERE email = ? LIMIT 1 ');
 
         if (!$sql->execute([$user]))
             Response::error('Erro inesperado.');
