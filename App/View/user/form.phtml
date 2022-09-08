@@ -1,0 +1,20 @@
+<?php
+use App\Controller\View;
+
+$id = $data['id'] ?? '';
+$name = $data['name'] ?? '';
+$email = $data['email'] ?? '';
+?>
+
+<form id="user_form" class="w-full grid grid-cols-2 gap-x-4 gap-y-2">
+    <input type="hidden" name="id" value="<?= $id ?>">
+    <div class="">
+        <?= View::getContent('_includes/form/input', ['value' => $name, 'name' => 'user', 'label' => 'Nome', 'type' => 'text']) ?>
+    </div>
+    <div class="">
+        <?= View::getContent('_includes/form/input', ['value' => $email, 'name' => 'email', 'label' => 'E-mail', 'type' => 'text']) ?>
+    </div>
+    <div class="col-span-2">
+        <?= View::getContent('_includes/form/input', ['value' => '', 'name' => 'password', 'label' => 'Senha', 'type' => 'password']) ?>
+    </div>
+</form>

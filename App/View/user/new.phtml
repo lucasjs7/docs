@@ -1,0 +1,63 @@
+<?php
+use App\Controller\View;
+
+View::getFile('_includes/h1');
+View::getFile('user/form');
+?>
+
+<hr class="border-zinc-300 my-4">
+
+<?= View::getContent('_includes/buttons/default', [
+    'id'      => 'submit',
+    'content' => 'Adicionar',
+    'color'   => 'white',
+    'bg'      => 'zinc-700',
+    'border'  => 'zinc-700',
+    'size'    => 'sm',
+    'class'   => 'mb-4 font-bold'
+]) ?>
+<?= View::getContent('_includes/form/loading', ['id' => 'blc_loading', 'color' => 'zinc-700', 'style' => 'display:none;']) ?>
+<?= View::getContent('_includes/buttons/default', [
+        'content' => 'Voltar',
+        'color'   => 'zinc-700',
+        'bg'      => 'transparent',
+        'border'  => 'zinc-400',
+        'size'    => 'sm',
+        'class'   => 'mb-4 font-semibold',
+        'attr'    => View::getAttr(['href' => '/users'])
+]) ?>
+
+<script>
+    $(document).on('click', '#submit', function(){
+
+        var btn = $(this);
+        var load = $('#blc_loading');
+
+        loading(true, load, btn);
+
+        $.ajax({
+            url: '/App/Controller/user/new.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                user: $('[name="user"]').val(),
+                email: $('[name="email"]').val(),
+                password: $('[name="password"]').val()
+            },
+            complete: function() {
+                loading(false, load, btn);
+            },
+            success: function(data) {
+
+                if (data.status) {
+                    $('#user_form').trigger('reset');
+                    msg('success', data.message);
+                } else {
+                    msg('error', data.message);
+                }
+
+            }
+        });
+
+    });
+</script>

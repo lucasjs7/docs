@@ -1,0 +1,81 @@
+<?php
+use App\Controller\View;
+
+View::getFile('_includes/h1');
+
+$thead = [
+    ['content' => 'ID',     'class' => 'id'],
+    ['content' => 'Nome',   'class' => 'nome'],
+    ['content' => 'E-mail', 'class' => 'email'],
+    ['content' => '',       'class' => 'buttons']
+];
+?>
+<?= View::getContent('_includes/buttons/default', [
+        'content' => 'Novo usuário',
+        'color'   => 'zinc-700',
+        'bg'      => 'transparent',
+        'border'  => 'zinc-400',
+        'size'    => 'sm',
+        'class'   => 'mb-4 font-bold',
+        'attr'    => View::getAttr(['href' => '/users/new'])
+]) ?>
+<?= View::getContent('_includes/modal/confirm', [
+    'id'     => 'modal_delete',
+    'title'  => 'Excluir',
+    'text'   => 'Você confirma realizar esta exclusão?',
+    'button' => 'Confirmar'
+]) ?>
+
+<hr class="border-zinc-300 mb-1 mb-2">
+<table class="w-full">
+    <thead>
+        <?php View::getFile('_includes/table/tr_thead', $thead); ?>
+    </thead>
+    <tbody>
+        <?php View::getFile('_includes/table/tr_tbody', $data['list']); ?>
+    </tbody>
+</table>
+
+<script>
+    var del_id = '';
+
+    $(document).on('click', '.btn_delete', function(){
+
+        del_id = $(this).parents('tr').find('.id').attr('data-id');
+
+        $('#modal_delete').show();
+
+    });
+
+    $(document).on('click', '#modal_delete .btn_confirm', function(){
+
+        var btn_conf = $(this);
+        var btn_canc = $('#modal_delete .btn_cancel');
+        var load = $('#modal_delete .btn_loading');
+
+        loading(true, load, btn_conf, btn_canc);
+
+        $.ajax({
+            url: '/App/Controller/user/delete.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                id: del_id
+            },
+            complete: function() {
+                loading(false, load, btn_conf, btn_canc);
+            },
+            success: function(data) {
+
+                if (data.status) {
+                    msg('success', data.message);
+                    $('td.id[data-id="'+del_id+'"]').parent('tr').remove();
+                    $('#modal_delete').hide();
+                } else {
+                    msg('error', data.message);
+                }
+            }
+        });
+
+    });
+</script>
