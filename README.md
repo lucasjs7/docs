@@ -20,4 +20,6 @@ $ docker compose down -v
 ```
 
 ## Configuração
-Renomeie o arquivo `config-example.php` para `config.php`, feito isso, entre no arquivo e edite a constante `MYSQL_HOST` para o seu IPV4.
+- Renomeie o arquivo `config-example.php` para `config.php`.
+- Entre no arquivo `config.php` e edite a constante `MYSQL_HOST` para o seu IPV4.
+- Crie um banco de dados chamado `docs` e importe os arquivos dentro da pasta `database`.
