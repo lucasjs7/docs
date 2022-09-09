@@ -36,7 +36,7 @@ View::getFile('user/form');
         loading(true, load, btn);
 
         $.ajax({
-            url: '/App/Controller/user/new.php',
+            url: '/users/store',
             type: 'post',
             dataType: 'json',
             data: {

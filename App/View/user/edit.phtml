@@ -36,7 +36,7 @@ View::getFile('user/form', $data['line']);
         loading(true, load, btn);
 
         $.ajax({
-            url: '/App/Controller/user/edit.php',
+            url: '/users/update',
             type: 'post',
             dataType: 'json',
             data: {
